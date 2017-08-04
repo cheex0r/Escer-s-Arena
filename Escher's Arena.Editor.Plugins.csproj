@@ -129,13 +129,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Escher&apos;s Arena.csproj">
-      <Project>{C2250655-CBDF-69B2-BA95-B31D14E38E48}</Project>
-      <Name>Escher&apos;s Arena</Name>
-    </ProjectReference>
     <ProjectReference Include="Escher&apos;s Arena.Plugins.csproj">
       <Project>{D6059970-7566-B8BE-0F8D-FC38D8580654}</Project>
       <Name>Escher&apos;s Arena.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="Escher&apos;s Arena.csproj">
+      <Project>{C2250655-CBDF-69B2-BA95-B31D14E38E48}</Project>
+      <Name>Escher&apos;s Arena</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +146,18 @@
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
+    <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
+    <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />
+    <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eyelash_blend.shader" />
+    <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
+    <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku_ds.shader" />
+    <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada.shader" />
+    <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
+    <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hair.shader" />
+    <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hair_ds.shader" />
+    <None Include="Assets\UnityChan\Stage\Shader\AlphaMask.shader" />
+    <None Include="Assets\UnityChan\license.txt" />
     <None Include="Assets\ZFPortals\Changelog.txt" />
     <None Include="Assets\ZFPortals\Demo\Standard Assets\Skyboxes\_skybox info.txt" />
     <None Include="Assets\ZFPortals\Readme.txt" />
