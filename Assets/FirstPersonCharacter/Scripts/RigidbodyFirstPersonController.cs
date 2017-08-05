@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using Gravity;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -83,6 +84,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public AdvancedSettings advancedSettings = new AdvancedSettings();
 
 
+        private GravityController m_GravityController;
         private Rigidbody m_RigidBody;
         private CapsuleCollider m_Capsule;
         private float m_YRotation;
@@ -120,6 +122,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Start()
         {
+            m_GravityController = GetComponent<GravityController>();
             m_RigidBody = GetComponent<Rigidbody>();
             m_Capsule = GetComponent<CapsuleCollider>();
             mouseLook.Init (transform, cam.transform);
@@ -166,7 +169,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     m_RigidBody.drag = 0f;
                     m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
-                    m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
+                    m_RigidBody.AddForce(movementSettings.JumpForce * m_GravityController.direction, ForceMode.Impulse);
                     m_Jumping = true;
                 }
 
@@ -189,7 +192,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private float SlopeMultiplier()
         {
-            float angle = Vector3.Angle(m_GroundContactNormal, Vector3.up);
+            float angle = Vector3.Angle(m_GroundContactNormal, -m_GravityController.direction);
             return movementSettings.SlopeCurveModifier.Evaluate(angle);
         }
 
@@ -197,11 +200,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void StickToGroundHelper()
         {
             RaycastHit hitInfo;
-            if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
+            if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), m_GravityController.direction, out hitInfo,
                                    ((m_Capsule.height/2f) - m_Capsule.radius) +
                                    advancedSettings.stickToGroundHelperDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
             {
-                if (Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up)) < 85f)
+                if (Mathf.Abs(Vector3.Angle(hitInfo.normal, -m_GravityController.direction)) < 85f)
                 {
                     m_RigidBody.velocity = Vector3.ProjectOnPlane(m_RigidBody.velocity, hitInfo.normal);
                 }
@@ -245,7 +248,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             m_PreviouslyGrounded = m_IsGrounded;
             RaycastHit hitInfo;
-            if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
+            if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), m_GravityController.direction, out hitInfo,
                                    ((m_Capsule.height/2f) - m_Capsule.radius) + advancedSettings.groundCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
             {
                 m_IsGrounded = true;
@@ -254,7 +257,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
             {
                 m_IsGrounded = false;
-                m_GroundContactNormal = Vector3.up;
+                m_GroundContactNormal = -m_GravityController.direction;
             }
             if (!m_PreviouslyGrounded && m_IsGrounded && m_Jumping)
             {
