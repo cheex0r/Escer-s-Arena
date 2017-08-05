@@ -169,7 +169,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     m_RigidBody.drag = 0f;
                     m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
-                    m_RigidBody.AddForce(movementSettings.JumpForce * m_GravityController.direction, ForceMode.Impulse);
+                    m_RigidBody.AddForce(-movementSettings.JumpForce * m_GravityController.direction, ForceMode.Impulse);
                     m_Jumping = true;
                 }
 
