@@ -45,7 +45,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					CurrentTargetSpeed = ForwardSpeed;
 				}
 #if !MOBILE_INPUT
-	            if (Input.GetKey(RunKey))
+	            if (CrossPlatformInputManager.GetButtonDown("Run"))
 	            {
 		            CurrentTargetSpeed *= RunMultiplier;
 		            m_Running = true;
@@ -87,7 +87,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private GravityController m_GravityController;
         private Rigidbody m_RigidBody;
         private CapsuleCollider m_Capsule;
-        private float m_YRotation;
         private Vector3 m_GroundContactNormal;
         private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
 

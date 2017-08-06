@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/ExperimentalCube.unity
+- path: Assets/Scenes/EXP-LongCubes.unity
   isLoaded: 1
   isActive: 1
